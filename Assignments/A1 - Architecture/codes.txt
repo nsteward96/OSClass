@@ -1,0 +1,5 @@
+// Add 4 + 7
+LDA 4
+ADD 7
+OUT
+HLT
