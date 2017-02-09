@@ -45,16 +45,26 @@ public class Seashell {
     // parameters: String input, the input string from function getUserInputString().
     // returns: none
     private void handleUserInput(String input) throws Exception {
-        String command = input.substring(0, 1);
-        String argument = input.substring(1).trim();
+        String[] tokens = input.split(" ");
         
+        String command = tokens[0];
+        String argument = "";
+        for (int i = 1; i < tokens.length; i++) {
+            argument += (" " + tokens[i]);
+        }
+        argument = argument.trim();
+
+        // Handle different user input cases
         switch (command) {
+            // List contents of current directory
             case "l":
-                // List contents of current directory   
+            case "list":
                 listDirectoryContents();
                 break;
             
+            // Moves down to a specified directory
             case "d":
+            case "down":
                 if(argument.equals("")) {
                     System.out.println("Please provide a directory to move down to, eg. 'd CatPhotos'");
                 } else {
@@ -64,16 +74,19 @@ public class Seashell {
             
             // Moves up one directory
             case "u":
+            case "up":
                 moveUpDirectory();
                 break;
             
             // Prints the current directory (a la 'Whereami')
             case "w":
+            case "wai":
                 printCurrentDirectory();
                 break;
             
             // Exits the program.
             case "e":
+            case "exit":
                 exitShell();
                 break;
             
@@ -113,6 +126,7 @@ public class Seashell {
         if(tokens[0] != '/') {
             dir = '/' + dir;
         }
+        
         // testingNewLocation will be used to ensure the location exists before altering userLocation.
         File testingNewLocation = new File(userLocation.getCanonicalFile() + dir);
         if(testingNewLocation.exists() && testingNewLocation.isDirectory()) {
