@@ -28,8 +28,11 @@ public class Main {
         String filenameB = askUser("Which file contains Matrix B?: ");
         Matrix a = readFile(filenameA);
         Matrix b = readFile(filenameB);
+        if (a.getRows() != b.getRows()) {
+            throw new Error("Incompatible matrixes for multiplying!");
+        }
         Matrix c = multiply(a, b);
-        writeToFile(c.toString());
+        writeToFile(c.toString(), c.getCellTotal());
     }
     
     private String askUser(String prompt) {
@@ -42,6 +45,11 @@ public class Main {
     private Matrix readFile(String filename) throws Exception {
         List<List<Integer>> matrixValues = new ArrayList<List<Integer>>();
         File file = new File(filename);
+        try {
+            BufferedReader test = new BufferedReader(new FileReader(file));
+        } catch (FileNotFoundException e) {
+            throw new Error("One of the input filenames is invalid: " + filename);
+        }
         BufferedReader in = new BufferedReader(new FileReader(file));
         String line = in.readLine();
         
@@ -75,10 +83,11 @@ public class Main {
         return c;
     }
     
-    private void writeToFile(String output) throws Exception {
+    private void writeToFile(String output, int total) throws Exception {
         File file = new File("output.txt");
         PrintWriter p = new PrintWriter(file);
         p.print(output);
+        p.print("Cell Total: " + total);
         p.close();
     }
 }

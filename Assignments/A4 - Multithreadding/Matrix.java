@@ -28,6 +28,16 @@ public class Matrix {
         return matrix.get(row).get(col);
     }
     
+    public int getCellTotal() {
+        int total = 0;
+        for (List<Integer> list : matrix) {
+            for (Integer number : list) {
+                total += number;
+            }
+        }
+        return total;
+    }
+    
     private void setCell(int row, int col, int value) {
         matrix.get(row).set(col, value);
     }
