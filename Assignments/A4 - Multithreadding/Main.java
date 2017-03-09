@@ -60,8 +60,6 @@ public class Main {
     
     private Matrix multiply(Matrix a, Matrix b) {
         List<List<Integer>> matrixValuesC = new ArrayList<List<Integer>>();
-        // For each value in each row in A, multiply the value by the value in each column in B
-        // Rows in A + columns in B (size of final array)
         for (int i = 0; i < a.getRows(); i++) {
             List<Integer> row = new ArrayList<Integer>();
             for (int j = 0; j < b.getCols(); j++) {
