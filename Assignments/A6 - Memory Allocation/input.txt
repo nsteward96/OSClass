@@ -1,0 +1,8 @@
+  Duration in clock ticks, Memory required for process
+3, 256
+20, 512
+3, 64
+3, 64
+20, 128
+5, 32
+10, 256
